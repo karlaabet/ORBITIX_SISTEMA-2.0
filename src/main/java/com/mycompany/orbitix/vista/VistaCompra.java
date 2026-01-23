@@ -22,6 +22,15 @@ public class VistaCompra extends JFrame {
 
     public VistaCompra(JFrame parent, Vuelo vuelo, List<Pasaje> pasajes, Usuario usuario)  {
         initComponents();
+        Fondo fondo = new Fondo("/recursos/fondo_vPrincipal_orbitix.png");
+        fondo.setLayout(new java.awt.BorderLayout());
+        setContentPane(fondo);
+        panelCompraFinal.setOpaque(false); 
+        fondo.add(panelCompraFinal, java.awt.BorderLayout.CENTER);
+         
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
     }
 
 

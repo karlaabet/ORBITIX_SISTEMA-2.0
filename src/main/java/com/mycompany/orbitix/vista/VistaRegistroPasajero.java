@@ -45,11 +45,15 @@ public VistaRegistroPasajero(java.awt.Frame parent, Vuelo vuelo, List<String> as
         this.asientos = asientos;
         this.usuarioLogueado = usuario; // Ahora 'usuario' sí existe como parámetro
 
-        Fondo fondo = new Fondo("/recursos/fondo_VPrincipal_orbitix.png");
-        fondo.setLayout(new java.awt.BorderLayout());
 
         initComponents(); 
-        
+        Fondo fondo = new Fondo("/recursos/fondo_vPrincipal_orbitix.png");
+        fondo.setLayout(new java.awt.BorderLayout());
+        setContentPane(fondo);
+        panelPrincipal.setOpaque(false); 
+        fondo.add(panelPrincipal, java.awt.BorderLayout.CENTER);
+         
+        setLocationRelativeTo(null);
         
         configurarComboBox();
         configurarDiseno();

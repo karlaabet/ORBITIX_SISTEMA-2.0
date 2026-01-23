@@ -22,6 +22,15 @@ public class VistaInicio extends javax.swing.JFrame {
      */
   public VistaInicio() {
     initComponents();
+        Fondo fondo = new Fondo("/recursos/fondo_login_orbitix.png");
+        fondo.setLayout(new java.awt.BorderLayout());
+        setContentPane(fondo);
+        panelInicio.setOpaque(false); 
+        fondo.add(panelInicio, java.awt.BorderLayout.CENTER);
+         
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
 
 }
    public JButton getBtnIniciarSesion() {

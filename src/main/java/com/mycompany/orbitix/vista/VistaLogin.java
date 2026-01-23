@@ -25,6 +25,13 @@ public class VistaLogin extends javax.swing.JFrame {
 
     public VistaLogin() {
         initComponents();
+        Fondo fondo = new Fondo("/recursos/fondo_vPrincipal_orbitix.png");
+        fondo.setLayout(new java.awt.BorderLayout());
+        setContentPane(fondo);
+        panelLogin.setOpaque(false); 
+        fondo.add(panelLogin, java.awt.BorderLayout.CENTER);
+         
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
     }
