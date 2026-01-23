@@ -18,7 +18,7 @@ public class VistaMapaAsientos extends JDialog {
         this.vuelo = vuelo;
         this.usuarioLogueado = usuario;
         initComponents();
-        setSize(850, 750); // Tamaño ajustado para visibilidad
+        setSize(850, 750); 
         setLocationRelativeTo(padre);
     }
 

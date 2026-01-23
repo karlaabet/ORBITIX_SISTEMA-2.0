@@ -499,10 +499,36 @@ private void finalizarVenta() {
 
 
             String codigoTkt = "TKT-" + System.currentTimeMillis() + "-" + (indiceActual + 1);
+String nombreAsiento = asientos.get(indiceActual);
 
+// Lógica para determinar la clase según la fila del asiento
+            ClaseAsiento claseReal;
+            try {
+              
+                int fila = Integer.parseInt(nombreAsiento.substring(1));
 
-            Pasaje p = new Pasaje(codigoTkt, vuelo.getPrecio(), asientos.get(indiceActual), 
-                                  ClaseAsiento.ECONOMICA, pasajero, vuelo, objetoEquipaje);
+                if (fila <= 2) {
+                    claseReal = ClaseAsiento.PRIMERA_CLASE;
+                } else if (fila <= 5) {
+                    claseReal = ClaseAsiento.EJECUTIVA;
+                } else {
+                    claseReal = ClaseAsiento.ECONOMICA;
+                }
+            } catch (Exception e) {
+                // Por si el formato del asiento es inesperado
+                claseReal = ClaseAsiento.ECONOMICA;
+            }
+
+            // Ahora creamos el pasaje con 'claseReal' en lugar de ECONOMICA fija
+            Pasaje p = new Pasaje(
+                codigoTkt, 
+                vuelo.getPrecio(), 
+                nombreAsiento, 
+                claseReal, // <--- CAMBIO AQUÍ
+                pasajero, 
+                vuelo, 
+                objetoEquipaje
+            );
 
 
             if (indiceActual < pasajesRegistrados.size()) {

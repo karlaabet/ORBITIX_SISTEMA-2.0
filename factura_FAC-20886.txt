@@ -1,0 +1,27 @@
+============================================
+               ORBITIX - FACTURA            
+============================================
+N° Factura: FAC-20886
+Fecha/Hora: 22/01/2026 21:38
+--------------------------------------------
+CLIENTE:
+Nombre : Paula Granda
+--------------------------------------------
+VUELO:
+Código : V008
+Ruta   : Galapagos -> Guayaquil
+Fecha  : 30/01/2026
+--------------------------------------------
+DETALLE:
+Pasajero | Asiento | Clase | Base | Recargo | Desc | Total
+----------------------------------------------------------
+Paula | B1 | PRIMERA_CLASE | 185.00 | 100.00 | 0.00 | 285.00
+   -> Motivo recargo: Recargo aplicado por clase/equipaje
+--------------------------------------------
+RESUMEN:
+Subtotal (Base)   : $185.00
+Total Recargos    : $100.00
+Total Descuentos  : $0.00
+TOTAL A PAGAR     : $285.00
+============================================
+Gracias por su compra.
