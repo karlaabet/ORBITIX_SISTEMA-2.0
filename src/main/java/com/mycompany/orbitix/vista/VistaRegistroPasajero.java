@@ -118,13 +118,11 @@ public VistaRegistroPasajero(java.awt.Frame parent, Vuelo vuelo, List<String> as
 
 private void finalizarVenta() {
     PasajeControlador control = new PasajeControlador();
-    // 'pasajesRegistrados' es List<Pasaje>
     boolean exito = control.registrarVentaTotal(pasajesRegistrados);
     
     if (exito) {
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        
-        // Esta línea dará error HASTA que modifiques el constructor de VistaCompra
+
         VistaCompra vistaPago = new VistaCompra(parentFrame, vuelo, pasajesRegistrados, usuarioLogueado);
         
         vistaPago.setVisible(true);

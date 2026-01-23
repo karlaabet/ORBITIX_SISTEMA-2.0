@@ -4,48 +4,61 @@
  */
 package com.mycompany.orbitix.vista;
 
-import com.mycompany.orbitix.modelo.MetodoPago;
-import com.mycompany.orbitix.modelo.PagoTarjeta;
 import com.mycompany.orbitix.modelo.Pasaje;
 import com.mycompany.orbitix.modelo.Usuario;
 import com.mycompany.orbitix.modelo.Vuelo;
+import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Locale;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author karla
- */
+public class VistaCompra extends JFrame {
 
-public class VistaCompra extends javax.swing.JFrame {
-    
-    private Vuelo vuelo;
-    private List<Pasaje> pasajes; 
-    private Usuario usuarioLogueado;
-    
+    private JTextField txtCodigoCompra;
+    private JTextField txtTotal;
+    private JButton btnCancelarCompra;
 
-    public VistaCompra(JFrame padre, Vuelo vuelo, List<Pasaje> pasajes, Usuario usuario) {
-        this.vuelo = vuelo;
-        this.pasajes = pasajes; // Asignación de la lista de objetos
-        this.usuarioLogueado = usuario;
-
+    public VistaCompra(JFrame parent, Vuelo vuelo, List<Pasaje> pasajes, Usuario usuario)  {
         initComponents();
-
-        // Configuración estética manual
-        Fondo fondo = new Fondo("/recursos/fondo_vPrincipal_orbitix.png");
-        fondo.setLayout(new java.awt.BorderLayout());
-        setContentPane(fondo);
-        panelCompraFinal.setOpaque(false); 
-        fondo.add(panelCompraFinal, java.awt.BorderLayout.CENTER);
-        panelTarjeta.setBackground(new java.awt.Color(102, 0, 153, 200)); 
-
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
-        llenarTablaResumen();
     }
+
+
+    public String getCodigoCompra() {
+        return txtCodigoCompra.getText();
+    }
+
+    public double getTotal() {
+        return Double.parseDouble(txtTotal.getText());
+    }
+
+    public JButton getBtnPagar() {
+        return btnPagar;
+    }
+
+    public JButton getBtnCancelarCompra() {
+        return btnCancelarCompra;
+    }
+
+
+    public void addBtnPagarListener(ActionListener l) {
+        btnPagar.addActionListener(l);
+    }
+
+    public void addBtnCancelarCompraListener(ActionListener l) {
+        btnCancelarCompra.addActionListener(l);
+    }
+
+    public String getCodigo() {
+        return txtCodigoCompra.getText();
+    }
+
+    public void limpiarCampos() {
+        txtCodigoCompra.setText("");
+        txtTotal.setText("");
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -270,87 +283,7 @@ public class VistaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumTarjeta1ActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        // 1. Validaciones iniciales
-    if (usuarioLogueado == null) {
-        JOptionPane.showMessageDialog(this, "Error: Sesión no válida.");
-        return;
-    }
-
-    // Usamos el campo txtNumTarjeta1 que es el que definiste en tu diseño para el número
-    if (txtNumTarjeta1.getText().trim().isEmpty() || txtCVV.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, complete los datos de su tarjeta.");
-        return;
-    }
-
-    try {
-        // 2. Crear la compra vinculada al usuario logueado
-        String codigoCompra = "C-" + (int) (Math.random() * 10000);
-        com.mycompany.orbitix.modelo.Compra nuevaCompra = new com.mycompany.orbitix.modelo.Compra(codigoCompra, usuarioLogueado);
-
-        // Agregamos los pasajes que recibimos en el constructor
-        if (pasajes != null) {
-            for (com.mycompany.orbitix.modelo.Pasaje p : pasajes) {
-                nuevaCompra.agregarPasaje(p);
-            }
-        }
-
-        // 3. Configuración del Pago (Patrón Strategy)
-        // CORRECCIÓN: Declaramos idPago antes de usarla
-        String idPago = "PAG-" + (System.currentTimeMillis() % 10000);
-        
-        com.mycompany.orbitix.modelo.MetodoPago metodoSeleccionado = new com.mycompany.orbitix.modelo.PagoTarjeta(); 
-
-        com.mycompany.orbitix.modelo.Pago objetoPago = new com.mycompany.orbitix.modelo.Pago(
-                idPago,
-                nuevaCompra.getTotal(),
-                new java.util.Date(),
-                metodoSeleccionado 
-        );
-
-        // 4. Procesar el pago
-        boolean pagoExitoso = objetoPago.procesarPago();
-
-        if (pagoExitoso) {
-            nuevaCompra.setPago(objetoPago);
-            
-            // 5. Persistencia y Documentación
-            com.mycompany.orbitix.datos.RepositorioArchivos repo = new com.mycompany.orbitix.datos.RepositorioArchivos();
-            repo.guardarCompra(nuevaCompra);
-            
-            // Generar Factura
-            String numFactura = "FAC-" + (System.currentTimeMillis() % 100000);
-            String facturaTxt = com.mycompany.orbitix.util.GenerarFactura.generarFactura(
-                    numFactura, usuarioLogueado, vuelo, pasajes
-            );
-
-            // Guardar factura en archivo físico
-            String nombreArchivo = "factura_" + numFactura + ".txt";
-            repo.guardarFacturaTxt(nombreArchivo, facturaTxt);
-
-            // 6. Interfaz de usuario: Mostrar factura
-            javax.swing.JTextArea area = new javax.swing.JTextArea(facturaTxt);
-            area.setEditable(false);
-            area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, 12));
-            javax.swing.JScrollPane sp = new javax.swing.JScrollPane(area);
-            sp.setPreferredSize(new java.awt.Dimension(650, 450));
-            
-            JOptionPane.showMessageDialog(this, sp, "Factura Generada", JOptionPane.INFORMATION_MESSAGE);
-            
-            // 7. Mensaje de éxito final y redirección
-            JOptionPane.showMessageDialog(this, "¡Compra Exitosa!\nCódigo de Compra: " + codigoCompra + "\nTotal: $" + String.format("%.2f", nuevaCompra.getTotal()));
-
-            // Volver a la vista principal
-            new VistaPrincipal(usuarioLogueado).setVisible(true);
-            this.dispose();
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "El pago ha sido rechazado por la entidad bancaria.");
-        }
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error crítico al procesar la compra: " + e.getMessage());
-        e.printStackTrace();
-    }
+    
     }//GEN-LAST:event_btnPagarActionPerformed
 
     /**
@@ -394,22 +327,4 @@ public static void main(String args[]) {
     private javax.swing.JTextField txtNumTarjeta;
     private javax.swing.JTextField txtNumTarjeta1;
     // End of variables declaration//GEN-END:variables
-
-    private void llenarTablaResumen() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-
-        for (Pasaje p : pasajes) {
-            // Mostramos la suma de base + recargo en la tabla
-            double precioFinal = p.getPrecio() + p.getRecargo(); 
-
-            modelo.addRow(new Object[]{
-                p.getPasajero().getNombre(),
-                p.getAsiento(),
-                p.getClase(),
-                "$" + String.format(Locale.US, "%.2f", precioFinal)
-            });
-        }
-    }
-
 }

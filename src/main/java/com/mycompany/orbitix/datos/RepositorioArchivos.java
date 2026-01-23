@@ -38,12 +38,10 @@ public class RepositorioArchivos implements RepositorioDatos {
 
     @Override
     public void guardarCompra(Compra c) {
-        // Bloque 1: Guardar la Compra general
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_COMPRAS, true))) {
-            // Usamos Locale.US para que el total siempre se guarde con punto decimal (ej: 1300.00)
             String linea = String.format(Locale.US, "%s;%.2f;%s;%s;%s",
                     c.getCodigo(),
-                    c.getTotal(), // Este total ya incluye recargos gracias al cambio en Compra.java
+                    c.getTotal(), 
                     c.getUsuario().getCedula(),
                     c.getPago().getMetodo(),
                     c.getPago().getId());
@@ -51,17 +49,15 @@ public class RepositorioArchivos implements RepositorioDatos {
             bw.newLine();
         } catch (IOException e) { e.printStackTrace(); }
 
-        // Bloque 2: Guardar los Pasajes detallados de esa compra
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJES, true))) {
             for (Pasaje p : c.getPasajes()) {
-                // Aquí guardamos el precio total del pasaje individual
                 String linea = String.format(Locale.US, "%s;%s;%s;%s;%s;%.2f",
                         p.getCodigo(),
                         c.getCodigo(),
                         p.getVuelo().getCodigo(),
                         p.getAsiento(),
                         p.getPasajero().getCedula(),
-                        p.getPrecio() + p.getRecargo()); // Aseguramos guardar el valor real con recargo
+                        p.getPrecio() + p.getRecargo()); 
                 bw.write(linea);
                 bw.newLine();
             }
@@ -134,30 +130,30 @@ public class RepositorioArchivos implements RepositorioDatos {
     
 
     @Override 
-public void guardarPasajero(Pasajero p) {
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJEROS, true))) {
-        String linea = String.format("%s;%s;%s;%s;%s;%d",
-                p.getCedula(), p.getNombre(), p.getApellido(), 
-                p.getTelefono(), p.getEmail(), p.getEdad());
-        bw.write(linea);
-        bw.newLine();
-    } catch (IOException e) {
-        e.printStackTrace();
+    public void guardarPasajero(Pasajero p) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJEROS, true))) {
+            String linea = String.format("%s;%s;%s;%s;%s;%d",
+                    p.getCedula(), p.getNombre(), p.getApellido(), 
+                    p.getTelefono(), p.getEmail(), p.getEdad());
+            bw.write(linea);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
 
-public void guardarPasaje(Pasaje p) {
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJES, true))) {
-        String linea = String.format("%s;%.2f;%s;%s;%s",
-                p.getCodigo(), p.getPrecio(), p.getVuelo().getCodigo(), 
-                p.getAsiento(), p.getPasajero().getCedula());
-        bw.write(linea);
-        bw.newLine();
-    } catch (IOException e) {
-        e.printStackTrace();
+    public void guardarPasaje(Pasaje p) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJES, true))) {
+            String linea = String.format("%s;%.2f;%s;%s;%s",
+                    p.getCodigo(), p.getPrecio(), p.getVuelo().getCodigo(), 
+                    p.getAsiento(), p.getPasajero().getCedula());
+            bw.write(linea);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
     @Override public List<Pasajero> cargarPasajeros(){
         return new ArrayList<>();
     }
@@ -210,24 +206,24 @@ public void guardarPasaje(Pasaje p) {
     }
 
 
- @Override
-public Usuario buscarUsuarioPorCedula(String cedula) {
-   
-    try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) { 
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] d = linea.split(";");
-        
-            if (d[0].equals(cedula)) {
-         
-                return new Cliente(d[0], d[1], d[2], d[3]);
-            }
-        }
-    } catch (IOException e) {
-        System.err.println("Error al buscar usuario: " + e.getMessage());
+    @Override
+    public Usuario buscarUsuarioPorCedula(String cedula) {
+
+       try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) { 
+           String linea;
+           while ((linea = br.readLine()) != null) {
+               String[] d = linea.split(";");
+
+               if (d[0].equals(cedula)) {
+
+                   return new Cliente(d[0], d[1], d[2], d[3]);
+               }
+           }
+       } catch (IOException e) {
+           System.err.println("Error al buscar usuario: " + e.getMessage());
+       }
+       return null; 
     }
-    return null; 
-}
 
     @Override
     public Pasajero buscarPasajeroPorCedula(String cedula) {

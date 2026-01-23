@@ -20,23 +20,13 @@ public class Compra {
         this.total = 0;
     }
 
-    /**
-     * Modificado para sumar precio base + recargo.
-     * Esto soluciona que en el archivo de compras solo apareciera el precio base.
-     * @param pasaje
-     */
     public void agregarPasaje(Pasaje pasaje) {
         if (pasaje != null) {
             pasajes.add(pasaje);
-            // Sumamos el precio (1250.0) más el recargo (50.0) 
-            // para que el total de la compra sea 1300.0
             this.total += (pasaje.getPrecio() + pasaje.getRecargo());
         }
     }
 
-    /**
-     * Método de seguridad para recalcular el total en cualquier momento
-     */
     public void recalcularTotal() {
         this.total = 0;
         for (Pasaje p : pasajes) {
@@ -48,7 +38,7 @@ public class Compra {
         return pago != null && !pasajes.isEmpty();
     }
 
-    // Getters y Setters
+
     public String getCodigo(){
         return codigo;
     }

@@ -11,9 +11,12 @@ com\mycompany\orbitix\modelo\MetodoPago.class
 com\mycompany\orbitix\modelo\Pasaje.class
 com\mycompany\orbitix\vista\VistaCompra$1.class
 com\mycompany\orbitix\modelo\Vuelo.class
+com\mycompany\orbitix\util\GenerarFactura.class
 com\mycompany\orbitix\vista\VistaRegistroPasajero$4.class
 com\mycompany\orbitix\vista\VistaRegistroPasajero$1.class
 com\mycompany\orbitix\vista\VistaRegistroPasajero.class
+com\mycompany\orbitix\controlador\CompraControlador.class
+com\mycompany\orbitix\controlador\InicioControlador.class
 com\mycompany\orbitix\modelo\TipoEquipaje.class
 com\mycompany\orbitix\vista\VistaRegistroPasajero$2.class
 com\mycompany\orbitix\vista\Fondo.class
@@ -27,8 +30,11 @@ com\mycompany\orbitix\modelo\Equipaje.class
 com\mycompany\orbitix\modelo\Pago.class
 com\mycompany\orbitix\modelo\Compra.class
 com\mycompany\orbitix\vista\VistaRegistroPasajero$4$1.class
+com\mycompany\orbitix\modelo\PagoTarjeta.class
+com\mycompany\orbitix\controlador\VistaPrincipalControlador.class
 com\mycompany\orbitix\datos\RepositorioDatos.class
 com\mycompany\orbitix\vista\VistaCompra$2.class
+com\mycompany\orbitix\controlador\LoginControlador.class
 com\mycompany\orbitix\modelo\Aerolinea.class
 com\mycompany\orbitix\modelo\Cliente.class
 com\mycompany\orbitix\vista\VistaRegistro.class

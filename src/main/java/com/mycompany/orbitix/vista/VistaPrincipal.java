@@ -4,27 +4,28 @@
  */
 package com.mycompany.orbitix.vista;
 
+import com.mycompany.orbitix.datos.RepositorioArchivos;
+import com.mycompany.orbitix.modelo.Usuario;
 import com.mycompany.orbitix.modelo.Vuelo;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author USUARIO
  */
 public class VistaPrincipal extends javax.swing.JFrame {
-    
-    private com.mycompany.orbitix.modelo.Usuario usuarioLogueado;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPrincipal.class.getName());
-    private java.util.List<Vuelo> listaVuelosActuales; 
-    private com.mycompany.orbitix.datos.RepositorioArchivos repo = new com.mycompany.orbitix.datos.RepositorioArchivos();
+    private static final Logger logger =
+        Logger.getLogger(VistaPrincipal.class.getName());
+    public Usuario usuarioLogueado;
+    public List<Vuelo> listaVuelosActuales;
+    public RepositorioArchivos repo = new RepositorioArchivos();
 
-    /**
-     * Creates new form VistaPrincipal
-     */
+   
     public VistaPrincipal() {
-     initComponents();
+    initComponents();
      
     configurarTabla(); 
     llenarCombosDinamicos();
@@ -41,9 +42,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }
     
-    public VistaPrincipal(com.mycompany.orbitix.modelo.Usuario usuario) {
-        this(); // Llama al constructor base para inicializar componentes
+    public VistaPrincipal(Usuario usuario) {
+        this();
         this.usuarioLogueado = usuario;
+
         if (usuario != null) {
             labelsaludo.setText("Hola, " + usuario.getNombre());
         }
@@ -220,55 +222,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cbseldestinoActionPerformed
 
     private void btnBuscarVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVuelosActionPerformed
-    String origen = cbselorigen.getSelectedItem().toString();
-        String destino = cbseldestino.getSelectedItem().toString();
-
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaVuelos.getModel();
-        modelo.setRowCount(0); // Limpiar tabla antes de mostrar nuevos resultados
-
-        for (Vuelo v : listaVuelosActuales) {
-            if (v.getRuta().getOrigen().equals(origen) && v.getRuta().getDestino().equals(destino)) {
-                modelo.addRow(new Object[]{
-                    v.getCodigo(),
-                    new java.text.SimpleDateFormat("dd/MM/yyyy").format(v.getFecha()),
-                    v.getRuta().getOrigen() + " -> " + v.getRuta().getDestino(),
-                    "$" + String.format("%.2f", v.getPrecio()),
-                    v.getRuta().getDuracionFormateada(), 
-                    v.getAsientosDisponibles()
-                });
-            }
-        }
+    
     }//GEN-LAST:event_btnBuscarVuelosActionPerformed
 
     private void btnSelecComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecComprarActionPerformed
-int fila = tablaVuelos.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, "Seleccione un vuelo primero.");
-        return;
-    }
 
-    String codigo = tablaVuelos.getValueAt(fila, 0).toString();
-    Vuelo seleccionado = listaVuelosActuales.stream()
-            .filter(v -> v.getCodigo().equals(codigo))
-            .findFirst().orElse(null);
-
-    if (seleccionado != null) {
-        // Pasamos 'this' (VistaPrincipal) y el usuario actual
-        VistaMapaAsientos mapa = new VistaMapaAsientos(this, seleccionado, this.usuarioLogueado);
-        mapa.setVisible(true);
-        this.setVisible(false); // Opcional: oculta la principal mientras elige asientos
-    }
     }//GEN-LAST:event_btnSelecComprarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-                                        
-    int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
-            "¿Está seguro que desea salir?", "Orbitix - Salir", 
-            javax.swing.JOptionPane.YES_NO_OPTION);
-    
-    if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-        System.exit(0);
-    }
 
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -311,26 +272,53 @@ int fila = tablaVuelos.getSelectedRow();
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTable tablaVuelos;
     // End of variables declaration//GEN-END:variables
-    private void configurarTabla() {
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel(
-                new Object [][] {},
-                // Añadimos "Duración" entre Precio y Disponibles
-                new String [] { "Código", "Fecha", "Ruta", "Precio", "Duración", "Disponibles" }
-            ) {
-                @Override
-                public boolean isCellEditable(int row, int column) { return false; } // Tabla no editable
-            };
-            tablaVuelos.setModel(modelo);
+ public javax.swing.JButton getBtnBuscarVuelos() {
+        return btnBuscarVuelos;
     }
 
-    private void llenarCombosDinamicos() {
+    public javax.swing.JButton getBtnSelecComprar() {
+        return btnSelecComprar;
+    }
+
+    public javax.swing.JButton getBtnSalir() {
+        return btnSalir;
+    }
+
+    public javax.swing.JComboBox<String> getCbselorigen() {
+        return cbselorigen;
+    }
+
+    public javax.swing.JComboBox<String> getCbseldestino() {
+        return cbseldestino;
+    }
+
+    public javax.swing.JTable getTablaVuelos() {
+        return tablaVuelos;
+    }
+
+
+    public void configurarTabla() {
+        javax.swing.table.DefaultTableModel modelo =
+                new javax.swing.table.DefaultTableModel(
+                        new Object[][]{},
+                        new String[]{"Código", "Fecha", "Ruta", "Precio", "Duración", "Disponibles"}
+                ) {
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                };
+        tablaVuelos.setModel(modelo);
+    }
+
+    public void llenarCombosDinamicos() {
         cbselorigen.removeAllItems();
         cbseldestino.removeAllItems();
 
+        listaVuelosActuales = repo.cargarVuelos();
+
         java.util.Set<String> origenes = new java.util.HashSet<>();
         java.util.Set<String> destinos = new java.util.HashSet<>();
-
-        listaVuelosActuales = repo.cargarVuelos(); 
 
         for (Vuelo v : listaVuelosActuales) {
             origenes.add(v.getRuta().getOrigen());
@@ -339,6 +327,6 @@ int fila = tablaVuelos.getSelectedRow();
 
         for (String o : origenes) cbselorigen.addItem(o);
         for (String d : destinos) cbseldestino.addItem(d);
-}
+    }
 
 }

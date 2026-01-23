@@ -4,7 +4,10 @@
  */
 package com.mycompany.orbitix.vista;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import com.mycompany.orbitix.controlador.InicioControlador;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -20,16 +23,23 @@ public class VistaInicio extends javax.swing.JFrame {
   public VistaInicio() {
     initComponents();
 
-    Fondo fondo = new Fondo("/recursos/fondo_login_orbitix.png");
-    fondo.setLayout(new java.awt.BorderLayout());
-    setContentPane(fondo);
-
-    panelInicio.setOpaque(false); 
-    fondo.add(panelInicio, java.awt.BorderLayout.CENTER);
-
-    setExtendedState(JFrame.MAXIMIZED_BOTH);
-    setLocationRelativeTo(null);
 }
+   public JButton getBtnIniciarSesion() {
+        return btnIniciarSesion;
+    }
+
+    public JButton getBtnCrearCuenta() {
+        return btnCrearCuenta;
+    }
+
+
+    public void addBtnIniciarSesionListener(ActionListener listenControles) {
+        btnIniciarSesion.addActionListener(listenControles);
+    }
+
+    public void addBtnCrearCuentaListener(ActionListener listenControles) {
+        btnCrearCuenta.addActionListener(listenControles);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,17 +122,12 @@ public class VistaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        VistaLogin login = new VistaLogin();
-        login.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
-        VistaRegistro registro = new VistaRegistro();
-        registro.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
+    }//GEN-LAST:event_btnCrearCuentaActionPerformed
+    
     /**
      * @param args the command line arguments
      */

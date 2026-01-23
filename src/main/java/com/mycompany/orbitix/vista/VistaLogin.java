@@ -6,32 +6,53 @@ package com.mycompany.orbitix.vista;
 
 import com.mycompany.orbitix.controlador.UsuarioControlador;
 import com.mycompany.orbitix.modelo.Usuario;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
  * @author USUARIO
  */
 public class VistaLogin extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaLogin.class.getName());
+    private static final java.util.logging.Logger logger =
+        java.util.logging.Logger.getLogger(VistaLogin.class.getName());
 
-    
-   
-    private int intentos = 0;
-    
     public VistaLogin() {
         initComponents();
-
-        Fondo fondo = new Fondo("/recursos/fondo_login_orbitix.png");
-        fondo.setLayout(new java.awt.BorderLayout());
-        setContentPane(fondo);
-
-        panelLogin.setOpaque(false); 
-        fondo.add(panelLogin, java.awt.BorderLayout.CENTER);
-
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+    }
+
+
+
+    public String getCorreo() {
+        return txtusuario1.getText();
+    }
+
+    public String getPassword() {
+        return new String(txtcontra.getPassword());
+    }
+
+    public void addIngresarListener(ActionListener listener) {
+        btnIngresar.addActionListener(listener);
+    }
+
+    public void addVolverListener(ActionListener listener) {
+        btnVolver.addActionListener(listener);
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void cerrar() {
+        this.dispose();
     }
 
     /**
@@ -154,51 +175,11 @@ public class VistaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        String email = txtusuario1.getText(); 
-        String pass = new String(txtcontra.getPassword()); 
-
-        UsuarioControlador control = new com.mycompany.orbitix.controlador.UsuarioControlador();
-        // 'user' contiene toda la información del usuario que inició sesión
-        Usuario user = control.login(email, pass);
-
-    if (user != null) {
-        intentos = 0; 
-        javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido: " + user.getNombre());
-
-        // CORRECCIÓN: Pasamos el objeto 'user' como argumento
-        VistaPrincipal principal = new VistaPrincipal(user); 
-        
-        principal.setVisible(true); 
-        this.dispose(); 
-        
-    } else {
-        intentos++;
-        
-        if (intentos >= 3) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Has superado el límite de 3 intentos.\nEl sistema se cerrará por seguridad.", 
-                "ACCESO BLOQUEADO", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-            
-            System.exit(0); 
-        } else {
-            int restantes = 3 - intentos;
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Correo o contraseña incorrectos.\nTe quedan " + restantes + " intentos.", 
-                "Error de Autenticación", 
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-            
-            txtcontra.setText("");
-            txtcontra.requestFocus();
-        }
-    }
 
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-    VistaInicio inicio = new VistaInicio();
-    inicio.setVisible(true);
-    this.dispose();
+    
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
