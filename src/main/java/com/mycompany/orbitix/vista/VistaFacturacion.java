@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class VistaFacturacion extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaFacturacion.class.getName());
-
+    private java.util.List<com.mycompany.orbitix.modelo.Pasaje> pasajes;
     /**
      * Creates new form VistaFacturacion
      */
@@ -33,6 +33,12 @@ public class VistaFacturacion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
     }
+    
+    public VistaFacturacion(java.util.List<com.mycompany.orbitix.modelo.Pasaje> pasajes) {
+    this();
+    this.pasajes = pasajes;
+    }
+    
     public JButton getBtnImprimirFactura() {
         return btnImprimirFactura;
     }
@@ -204,7 +210,22 @@ public class VistaFacturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImprimirFacturaActionPerformed
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
-        // TODO add your handling code here:
+
+    if (pasajes == null || pasajes.isEmpty()) {
+        mostrarMensaje("No hay pasajes para imprimir ticket.");
+        return;
+    }
+
+    StringBuilder sb = new StringBuilder();
+    for (com.mycompany.orbitix.modelo.Pasaje p : pasajes) {
+        sb.append(com.mycompany.orbitix.util.Ticket.generarBoardingPass(p)).append("\n");
+    }
+
+    javax.swing.JTextArea area = new javax.swing.JTextArea(sb.toString(), 25, 60);
+    area.setEditable(false);
+    javax.swing.JOptionPane.showMessageDialog(this, new javax.swing.JScrollPane(area),
+            "Ticket(s) de vuelo", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 
     private void btnImprimirAmbosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirAmbosActionPerformed
