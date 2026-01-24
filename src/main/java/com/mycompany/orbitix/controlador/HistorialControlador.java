@@ -21,7 +21,7 @@ public class HistorialControlador {
             Vuelo vuelo,
             List<String> asientos,
             double totalFinal
-    ) {
+    ){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 

@@ -1,0 +1,26 @@
+============================================
+               ORBITIX - FACTURA            
+============================================
+N° Factura: FAC-55C0BF92
+Fecha/Hora: 23/01/2026 21:46
+--------------------------------------------
+CLIENTE:
+Nombre : Andrea
+--------------------------------------------
+VUELO:
+Código : V001
+Ruta   : Quito -> Guayaquil
+Fecha  : 25/01/2026
+--------------------------------------------
+DETALLE:
+Pasajero | Asiento | Clase | Base | Recargo | Desc | Total
+----------------------------------------------------------
+Karla | C7 | ECONOMICA | 85.50 | 0.00 | 0.00 | 85.50
+--------------------------------------------
+RESUMEN:
+Subtotal (Base)   : $85.50
+Total Recargos    : $0.00
+Total Descuentos  : $0.00
+TOTAL A PAGAR     : $85.50
+============================================
+Gracias por su compra.

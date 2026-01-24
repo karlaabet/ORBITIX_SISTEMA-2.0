@@ -9,10 +9,6 @@ import java.util.*;
 import javax.swing.*;
 import com.mycompany.orbitix.modelo.Vuelo;
 
-/**
- * Vista de Registro de Pasajeros - Orbitix
- * @author karla (Modificado)
- */
 public class VistaRegistroPasajero extends javax.swing.JDialog{
     private Vuelo vuelo;
     private Usuario usuarioLogueado;
@@ -421,7 +417,6 @@ java.awt.EventQueue.invokeLater(new Runnable() {
        
         com.mycompany.orbitix.modelo.Usuario usuarioDummy = null; 
 
-        // Agregamos el 5to parámetro al final
         VistaRegistroPasajero dialog = new VistaRegistroPasajero(
             new javax.swing.JFrame(),
             vuelo,

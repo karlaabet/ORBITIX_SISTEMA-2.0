@@ -4,15 +4,10 @@
  */
 package com.mycompany.orbitix.controlador;
 
-import com.mycompany.orbitix.datos.RepositorioArchivos;
-import com.mycompany.orbitix.datos.RepositorioDatos;
 import com.mycompany.orbitix.modelo.Usuario;
 import com.mycompany.orbitix.vista.VistaInicio;
 import com.mycompany.orbitix.vista.VistaLogin;
 import com.mycompany.orbitix.vista.VistaPrincipal;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,13 +59,10 @@ public class LoginControlador {
         }
     }
 
-    private void volver() {
-  
+    private void volver(){
     VistaInicio inicio = new VistaInicio();
-    
     new com.mycompany.orbitix.controlador.InicioControlador(inicio);
-  
     inicio.setVisible(true);
     vista.cerrar();
-}
+    }
 }

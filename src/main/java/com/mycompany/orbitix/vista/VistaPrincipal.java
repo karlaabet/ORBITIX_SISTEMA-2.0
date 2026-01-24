@@ -276,42 +276,42 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnhistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhistorialActionPerformed
-Usuario u = UsuarioControlador.getUsuarioActual();
+        Usuario u = UsuarioControlador.getUsuarioActual();
 
-    if (u == null) {
-        JOptionPane.showMessageDialog(this, "Debes iniciar sesión primero.");
-        return;
-    }
+            if (u == null) {
+                JOptionPane.showMessageDialog(this, "Debes iniciar sesión primero.");
+                return;
+            }
 
-    List<com.mycompany.orbitix.modelo.HistorialVuelo> lista =
-            HistorialControlador.obtenerHistorial(u);
+            List<com.mycompany.orbitix.modelo.HistorialVuelo> lista =
+                    HistorialControlador.obtenerHistorial(u);
 
-    if (lista.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No tienes vuelos registrados.");
-        return;
-    }
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No tienes vuelos registrados.");
+                return;
+            }
 
-    StringBuilder texto = new StringBuilder();
-    texto.append("=== HISTORIAL DE VUELOS ===\n\n");
+            StringBuilder texto = new StringBuilder();
+            texto.append("=== HISTORIAL DE VUELOS ===\n\n");
 
-    for (HistorialVuelo hv : lista) {
-        texto.append("Vuelo: ").append(hv.getCodigoVuelo()).append("\n");
-        texto.append("Ruta: ").append(hv.getOrigen())
-             .append(" -> ").append(hv.getDestino()).append("\n");
-        texto.append("Fecha: ").append(hv.getFecha()).append("\n");
-        texto.append("Asiento: ").append(hv.getAsiento()).append("\n");
-        texto.append("Total pagado: $").append(hv.getTotalPagado()).append("\n");
-        texto.append("-----------------------------\n");
-    }
+            for (HistorialVuelo hv : lista) {
+                texto.append("Vuelo: ").append(hv.getCodigoVuelo()).append("\n");
+                texto.append("Ruta: ").append(hv.getOrigen())
+                     .append(" -> ").append(hv.getDestino()).append("\n");
+                texto.append("Fecha: ").append(hv.getFecha()).append("\n");
+                texto.append("Asiento: ").append(hv.getAsiento()).append("\n");
+                texto.append("Total pagado: $").append(hv.getTotalPagado()).append("\n");
+                texto.append("-----------------------------\n");
+            }
 
-    JTextArea area = new JTextArea(texto.toString());
-    area.setEditable(false);
-    area.setRows(20);
-    area.setColumns(40);
+            JTextArea area = new JTextArea(texto.toString());
+            area.setEditable(false);
+            area.setRows(20);
+            area.setColumns(40);
 
-    JScrollPane scroll = new JScrollPane(area);
+            JScrollPane scroll = new JScrollPane(area);
 
-    JOptionPane.showMessageDialog(this, scroll, "Mi Historial", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, scroll, "Mi Historial", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnhistorialActionPerformed
 
