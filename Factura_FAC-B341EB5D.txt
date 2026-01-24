@@ -1,0 +1,27 @@
+============================================
+               ORBITIX - FACTURA            
+============================================
+N° Factura: FAC-B341EB5D
+Fecha/Hora: 23/01/2026 20:00
+--------------------------------------------
+CLIENTE:
+Nombre : Paula Granda
+--------------------------------------------
+VUELO:
+Código : V006
+Ruta   : Manta -> Quito
+Fecha  : 28/01/2026
+--------------------------------------------
+DETALLE:
+Pasajero | Asiento | Clase | Base | Recargo | Desc | Total
+----------------------------------------------------------
+Paula | C2 | PRIMERA_CLASE | 70.00 | 100.00 | 0.00 | 170.00
+   -> Motivo recargo: Recargo aplicado por clase/equipaje
+--------------------------------------------
+RESUMEN:
+Subtotal (Base)   : $70.00
+Total Recargos    : $100.00
+Total Descuentos  : $0.00
+TOTAL A PAGAR     : $170.00
+============================================
+Gracias por su compra.

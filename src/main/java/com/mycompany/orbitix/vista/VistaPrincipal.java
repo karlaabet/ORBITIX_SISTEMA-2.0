@@ -49,21 +49,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this();
         this.usuarioLogueado = usuario;
 
-        
-        com.github.lgooddatepicker.components.DatePickerSettings settings = new com.github.lgooddatepicker.components.DatePickerSettings();
+       
+        DatePickerSettings settings = new DatePickerSettings();
         settings.setFormatForDatesCommonEra("dd/MM/yyyy");
         settings.setAllowKeyboardEditing(false);
 
-        datePicker = new com.github.lgooddatepicker.components.DatePicker(settings);
-
-  
-        datePicker.setBounds(55, 410, 220, 35); 
-
-       
-        cbseldestino.setVisible(false); 
-        labeldestino.setText("Fecha de Viaje:"); 
-
+        datePicker = new DatePicker(settings);
+        datePicker.setBounds(55, 420, 220, 35); 
         panelPrincipal.add(datePicker);
+
 
         if (usuario != null) {
             labelsaludo.setText("Hola, " + usuario.getNombre());
@@ -81,7 +75,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         panelPrincipal = new javax.swing.JPanel();
         labelsaludo = new javax.swing.JLabel();
-        labeldestino = new javax.swing.JLabel();
         labelvenco1 = new javax.swing.JLabel();
         labelorigen1 = new javax.swing.JLabel();
         btnBuscarVuelos = new javax.swing.JButton();
@@ -91,6 +84,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         tablaVuelos = new javax.swing.JTable();
         btnSelecComprar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        labeldestino1 = new javax.swing.JLabel();
+        labeldestino2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1360, 677));
@@ -101,10 +96,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         labelsaludo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         labelsaludo.setForeground(new java.awt.Color(255, 255, 255));
         labelsaludo.setText("           Hola, Usuario");
-
-        labeldestino.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        labeldestino.setForeground(new java.awt.Color(255, 255, 255));
-        labeldestino.setText("Destino:");
 
         labelvenco1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         labelvenco1.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +142,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(this::btnSalirActionPerformed);
 
+        labeldestino1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labeldestino1.setForeground(new java.awt.Color(255, 255, 255));
+        labeldestino1.setText("Destino:");
+
+        labeldestino2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labeldestino2.setForeground(new java.awt.Color(255, 255, 255));
+        labeldestino2.setText("Fecha:");
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -158,24 +157,24 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(337, 337, 337)
+                        .addGap(424, 424, 424)
                         .addComponent(labelsaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(211, 211, 211)
+                        .addGap(124, 124, 124)
                         .addComponent(btnSalir))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labeldestino)
-                                    .addComponent(labelorigen1))
-                                .addGap(240, 240, 240)
+                                .addComponent(labelorigen1)
+                                .addGap(249, 249, 249)
                                 .addComponent(labelvenco1))
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
                                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnBuscarVuelos)
                                     .addComponent(cbseldestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbselorigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbselorigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labeldestino1)
+                                    .addComponent(labeldestino2))
                                 .addGap(193, 193, 193)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
@@ -188,29 +187,33 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(labelsaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(btnSalir)))
-                .addGap(18, 18, 18)
+                        .addComponent(btnSalir)
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelsaludo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelorigen1)
                     .addComponent(labelvenco1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(cbselorigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(labeldestino)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(32, 32, 32)
+                        .addComponent(labeldestino1)
+                        .addGap(33, 33, 33)
                         .addComponent(cbseldestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
+                        .addGap(43, 43, 43)
+                        .addComponent(labeldestino2)
+                        .addGap(150, 150, 150)
                         .addComponent(btnBuscarVuelos))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addComponent(btnSelecComprar)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,7 +296,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbseldestino;
     private javax.swing.JComboBox<String> cbselorigen;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labeldestino;
+    private javax.swing.JLabel labeldestino1;
+    private javax.swing.JLabel labeldestino2;
     private javax.swing.JLabel labelorigen1;
     private javax.swing.JLabel labelsaludo;
     private javax.swing.JLabel labelvenco1;

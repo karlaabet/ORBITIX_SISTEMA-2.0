@@ -10,13 +10,13 @@ import com.mycompany.orbitix.modelo.Vuelo;
 import com.mycompany.orbitix.vista.VistaMapaAsientos; 
 import com.mycompany.orbitix.vista.VistaPrincipal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 
 public class VistaPrincipalControlador {
 
@@ -57,26 +57,23 @@ public class VistaPrincipalControlador {
     }
 
     private void buscarVuelos() {
-        // 1. Validar que los combos tengan selección
         if (vista.getCbselorigen().getSelectedItem() == null || 
             vista.getCbseldestino().getSelectedItem() == null) {
             JOptionPane.showMessageDialog(vista, "No hay rutas disponibles para buscar.");
             return;
         }
 
-        // 2. CORRECCIÓN DEL PICKER: Obtener la fecha seleccionada
+        // --- NUEVO: Leer fecha del Picker ---
         LocalDate fechaSeleccionada = vista.getDatePicker().getDate();
         if (fechaSeleccionada == null) {
             JOptionPane.showMessageDialog(vista, "Por favor, selecciona una fecha para viajar.");
             return;
         }
+        String fechaBusquedaStr = fechaSeleccionada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        // ------------------------------------
 
-        // 3. Capturar datos de origen y destino
         String origen = vista.getCbselorigen().getSelectedItem().toString();
         String destino = vista.getCbseldestino().getSelectedItem().toString();
-
-        // 4. Formatear la fecha del picker para comparar (dd/MM/yyyy)
-        String fechaBusquedaStr = fechaSeleccionada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         DefaultTableModel modelo = (DefaultTableModel) vista.getTablaVuelos().getModel();
         modelo.setRowCount(0); 
@@ -84,11 +81,10 @@ public class VistaPrincipalControlador {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         boolean encontrado = false;
 
-        // 5. Filtrar en la lista de vuelos
         for (Vuelo v : vuelos) {
             String fechaVueloStr = sdf.format(v.getFecha());
 
-            // Comparación triple: Origen + Destino + Fecha
+            // Filtro por Origen, Destino y la Fecha del Picker
             if (v.getRuta().getOrigen().equalsIgnoreCase(origen) && 
                 v.getRuta().getDestino().equalsIgnoreCase(destino) &&
                 fechaVueloStr.equals(fechaBusquedaStr)) {
@@ -105,7 +101,6 @@ public class VistaPrincipalControlador {
             }
         }
 
-        // 6. Mensaje si no hubo coincidencias
         if (!encontrado) {
             JOptionPane.showMessageDialog(vista, "No se encontraron vuelos para esa ruta en la fecha elegida.");
         }
