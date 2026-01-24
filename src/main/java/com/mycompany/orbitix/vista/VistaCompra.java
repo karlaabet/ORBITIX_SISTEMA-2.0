@@ -325,6 +325,14 @@ public void cargarResumen(java.util.List<Pasaje> pasajes) {
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
 
     try {
+        if (!rbVisa.isSelected() && !rbMasterCard.isSelected()) {
+            JOptionPane.showMessageDialog(this,
+            "Debes seleccionar un tipo de tarjeta (VISA o MASTERCARD).",
+            "Tarjeta no seleccionada",
+            JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if (usuarioLogueado == null || vueloActual == null || pasajesActuales == null || pasajesActuales.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No hay datos de compra para registrar.");
             return;
