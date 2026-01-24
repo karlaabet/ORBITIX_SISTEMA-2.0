@@ -10,6 +10,8 @@ import com.mycompany.orbitix.modelo.Vuelo;
 import java.util.List;
 import javax.swing.JFrame;
 import java.util.logging.Logger;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 
 /**
@@ -17,6 +19,7 @@ import java.util.logging.Logger;
  * @author USUARIO
  */
 public class VistaPrincipal extends javax.swing.JFrame {
+    private DatePicker datePicker;
     private static final Logger logger =
     Logger.getLogger(VistaPrincipal.class.getName());
     public Usuario usuarioLogueado;
@@ -45,6 +48,22 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public VistaPrincipal(Usuario usuario) {
         this();
         this.usuarioLogueado = usuario;
+
+        
+        com.github.lgooddatepicker.components.DatePickerSettings settings = new com.github.lgooddatepicker.components.DatePickerSettings();
+        settings.setFormatForDatesCommonEra("dd/MM/yyyy");
+        settings.setAllowKeyboardEditing(false);
+
+        datePicker = new com.github.lgooddatepicker.components.DatePicker(settings);
+
+  
+        datePicker.setBounds(55, 410, 220, 35); 
+
+       
+        cbseldestino.setVisible(false); 
+        labeldestino.setText("Fecha de Viaje:"); 
+
+        panelPrincipal.add(datePicker);
 
         if (usuario != null) {
             labelsaludo.setText("Hola, " + usuario.getNombre());
@@ -305,7 +324,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         return tablaVuelos;
     }
 
-
+    public DatePicker getDatePicker() {
+    return datePicker;
+    }
+    
     public void configurarTabla() {
         javax.swing.table.DefaultTableModel modelo =
                 new javax.swing.table.DefaultTableModel(
