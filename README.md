@@ -27,7 +27,7 @@ Sigue estos pasos para descargar y ejecutar el proyecto **Orbitix** en tu entorn
 ### 1. Clonar y Abrir el proyecto
 - Inicia **NetBeans**.
 - Ve al menú superior: **Team > Git > Clone...**
-- Ingresa la URL del repositorio (ej: `https://github.com/tu-usuario/orbitix.git`) y tus credenciales si es necesario.
+- Ingresa la URL del repositorio (ej: `[(https://github.com/tu-usuario/ORBITIX_SISTEMA-2.0.git4)`] y tus credenciales si es necesario.
 - Sigue los pasos del asistente y al finalizar, selecciona **Open Project**.
 - NetBeans cargará automáticamente la estructura del proyecto (carpetas `src`, paquetes, dependencias, etc.).
 
@@ -56,7 +56,7 @@ Sigue estos pasos para descargar y ejecutar el proyecto **Orbitix** en tu entorn
 ¡Mira en acción cómo funciona nuestro proyecto! Alucinarás con lo fácil que es comprar un vuelo.
 En este video te mostramos paso a paso su funcionamiento, los resultados y por qué es tan increíble. Te mostramos lo fácil que es ejecutar el proyecto.
 
-[![Ver el video en YouTube]
+[![Ver el video en YouTube](https://img.youtube.com/vi/x0vGGc2SzPI/0.jpg)](https://www.youtube.com/watch?v=x0vGGc2SzPI)
 ## Soporte Técnico
 
  *Si tienes problemas con nuestros servicios, contáctanos:*  
