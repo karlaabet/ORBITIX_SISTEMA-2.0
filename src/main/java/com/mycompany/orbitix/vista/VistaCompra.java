@@ -324,37 +324,30 @@ public void cargarResumen(java.util.List<Pasaje> pasajes) {
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
 
-    try {
-        if (usuarioLogueado == null || vueloActual == null || pasajesActuales == null || pasajesActuales.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay datos de compra para registrar.");
-            return;
+        try {
+            if (usuarioLogueado == null || vueloActual == null || pasajesActuales == null || pasajesActuales.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay datos de compra para registrar.");
+                return;
+            }
+            java.util.List<String> asientosSeleccionados = new java.util.ArrayList<>();
+            double totalFinal = 0;
+
+            for (Pasaje p : pasajesActuales) {
+                asientosSeleccionados.add(p.getAsiento());
+                totalFinal += (p.getPrecio() + p.getRecargo());
+            }
+            HistorialControlador.registrarHistorial(
+                usuarioLogueado,
+                vueloActual,
+                asientosSeleccionados,
+                totalFinal
+            );
+
+            JOptionPane.showMessageDialog(this, "Pago realizado y vuelo registrado en tu historial.");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al procesar el pago: " + ex.getMessage());
         }
-
-        // 1) Sacar asientos y total desde los pasajes (tú ya los muestras en la tabla)
-        java.util.List<String> asientosSeleccionados = new java.util.ArrayList<>();
-        double totalFinal = 0;
-
-        for (Pasaje p : pasajesActuales) {
-            asientosSeleccionados.add(p.getAsiento());
-            totalFinal += (p.getPrecio() + p.getRecargo());
-        }
-
-        // 2) Registrar historial (por usuario logueado)
-        HistorialControlador.registrarHistorial(
-            usuarioLogueado,
-            vueloActual,
-            asientosSeleccionados,
-            totalFinal
-        );
-
-        JOptionPane.showMessageDialog(this, "Pago realizado y vuelo registrado en tu historial.");
-
-        // (opcional) cerrar la ventana
-        // this.dispose();
-
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error al procesar el pago: " + ex.getMessage());
-    }
     }//GEN-LAST:event_btnPagarActionPerformed
 
     /**
@@ -372,7 +365,6 @@ public static void main(String args[]) {
             java.util.logging.Logger.getLogger(VistaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        // Solo un invokeLater con el mensaje de aviso
         java.awt.EventQueue.invokeLater(() -> {
             JOptionPane.showMessageDialog(null, "Orbitix: Esta ventana requiere datos de vuelo para iniciar.\nPor favor, acceda desde la búsqueda de vuelos.");
         });

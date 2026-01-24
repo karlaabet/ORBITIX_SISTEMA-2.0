@@ -33,7 +33,9 @@ public class RepositorioArchivos implements RepositorioDatos {
                         v.getPrecio());           
                 bw.write(linea);
                 bw.newLine();
-            } catch (IOException e) { e.printStackTrace(); }
+            } catch (IOException e){
+                e.printStackTrace(); 
+            }
         }
 
     @Override
@@ -47,7 +49,9 @@ public class RepositorioArchivos implements RepositorioDatos {
                     c.getPago().getId());
             bw.write(linea);
             bw.newLine();
-        } catch (IOException e) { e.printStackTrace(); }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH_PASAJES, true))) {
             for (Pasaje p : c.getPasajes()) {
@@ -61,7 +65,9 @@ public class RepositorioArchivos implements RepositorioDatos {
                 bw.write(linea);
                 bw.newLine();
             }
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -125,7 +131,9 @@ public class RepositorioArchivos implements RepositorioDatos {
                         }
                     }
                 }
-            } catch (IOException e) { e.printStackTrace(); }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
     
 
@@ -137,7 +145,7 @@ public class RepositorioArchivos implements RepositorioDatos {
                     p.getTelefono(), p.getEmail(), p.getEdad());
             bw.write(linea);
             bw.newLine();
-        } catch (IOException e) {
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -208,7 +216,6 @@ public class RepositorioArchivos implements RepositorioDatos {
 
     @Override
     public Usuario buscarUsuarioPorCedula(String cedula) {
-
        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) { 
            String linea;
            while ((linea = br.readLine()) != null) {
@@ -227,38 +234,39 @@ public class RepositorioArchivos implements RepositorioDatos {
 
     @Override
     public Pasajero buscarPasajeroPorCedula(String cedula) {
-    try (BufferedReader br = new BufferedReader(new FileReader(PATH_PASAJEROS))) {
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] d = linea.split(";");
-            if (d[0].equals(cedula)) 
-                return new Pasajero(d[0], d[1], d[2], d[3], d[4], Integer.parseInt(d[5]));
+        try (BufferedReader br = new BufferedReader(new FileReader(PATH_PASAJEROS))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] d = linea.split(";");
+                if (d[0].equals(cedula)) 
+                    return new Pasajero(d[0], d[1], d[2], d[3], d[4], Integer.parseInt(d[5]));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) { e.printStackTrace(); }
-    return null;
-}
+        return null;
+    }
 
     @Override
     public Vuelo buscarVueloPorCodigo(String codigoVuelo) {
-    try (BufferedReader br = new BufferedReader(new FileReader("vuelos.txt"))) { 
-        String linea;
-        while ((linea = br.readLine()) != null) {
-            String[] d = linea.split(";");
-            if (d[0].equals(codigoVuelo)) {
+        try (BufferedReader br = new BufferedReader(new FileReader("vuelos.txt"))) { 
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] d = linea.split(";");
+                if (d[0].equals(codigoVuelo)) {
 
+                }
             }
+        } catch (IOException e) {
+            System.err.println("Error al buscar vuelo: " + e.getMessage());
         }
-    } catch (IOException e) {
-        System.err.println("Error al buscar vuelo: " + e.getMessage());
+        return null;
     }
-    return null;
-}
     public void guardarFacturaTxt(String nombreArchivo, String contenidoFactura) {
-    try (java.io.BufferedWriter bw = new java.io.BufferedWriter(new java.io.FileWriter(nombreArchivo))) {
-        bw.write(contenidoFactura);
-    } catch (Exception e) {
-        throw new RuntimeException("No se pudo guardar la factura: " + e.getMessage());
-    }
-}
-
+        try (java.io.BufferedWriter bw = new java.io.BufferedWriter(new java.io.FileWriter(nombreArchivo))) {
+            bw.write(contenidoFactura);
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo guardar la factura: " + e.getMessage());
+        }
+   }
 }

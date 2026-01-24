@@ -38,9 +38,6 @@ public class GenerarFactura {
 
         sb.append("CLIENTE:\n");
         sb.append("Nombre : ").append(user != null ? user.getNombre() : "N/A").append("\n");
-        // Si tu Usuario tiene email/cedula, descomenta:
-        // sb.append("Correo : ").append(user.getEmail()).append("\n");
-        // sb.append("Cédula : ").append(user.getCedula()).append("\n");
         sb.append("--------------------------------------------\n");
 
         sb.append("VUELO:\n");
@@ -64,8 +61,6 @@ public class GenerarFactura {
             for (Pasaje p : pasajes) {
                 double base = p.getPrecio();
                 double recargo = p.getRecargo();
-
-                // Descuento simple de ejemplo: 10% si compra 3 o más pasajes
                 double descuento = 0;
                 String motivoDesc = "";
                 if (totalPasajes >= 3) {

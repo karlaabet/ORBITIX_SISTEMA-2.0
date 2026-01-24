@@ -25,7 +25,7 @@ public class VistaPrincipalControlador {
     private RepositorioArchivos repo;
     private List<Vuelo> vuelos;
 
-    public VistaPrincipalControlador(VistaPrincipal vista, Usuario usuario) {
+    public VistaPrincipalControlador(VistaPrincipal vista, Usuario usuario){
         this.vista = vista;
         this.usuario = usuario;
         this.repo = new RepositorioArchivos();
@@ -56,14 +56,13 @@ public class VistaPrincipalControlador {
         vista.getBtnSalir().addActionListener(e -> salir());
     }
 
-    private void buscarVuelos() {
+    private void buscarVuelos(){
         if (vista.getCbselorigen().getSelectedItem() == null || 
             vista.getCbseldestino().getSelectedItem() == null) {
             JOptionPane.showMessageDialog(vista, "No hay rutas disponibles para buscar.");
             return;
         }
 
-        // --- NUEVO: Leer fecha del Picker ---
         LocalDate fechaSeleccionada = vista.getDatePicker().getDate();
         if (fechaSeleccionada == null) {
             JOptionPane.showMessageDialog(vista, "Por favor, selecciona una fecha para viajar.");
@@ -106,7 +105,7 @@ public class VistaPrincipalControlador {
         }
     }
 
-    private void seleccionarVuelo() {
+    private void seleccionarVuelo(){
         int fila = vista.getTablaVuelos().getSelectedRow();
 
         if (fila == -1) {
@@ -121,7 +120,7 @@ public class VistaPrincipalControlador {
                 .findFirst()
                 .orElse(null);
 
-        if (seleccionado != null) {
+        if (seleccionado != null){
              JOptionPane.showMessageDialog(vista, "Vuelo seleccionado: " + seleccionado.getCodigo() + "\nIr a Mapa de Asientos...");
              
              VistaMapaAsientos mapa = new VistaMapaAsientos(vista, seleccionado, usuario); 
@@ -130,7 +129,7 @@ public class VistaPrincipalControlador {
         }
     }
 
-    private void salir() {
+    private void salir(){
         int confirm = JOptionPane.showConfirmDialog(vista, "¿Está seguro que desea salir?", "Orbitix", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             System.exit(0);

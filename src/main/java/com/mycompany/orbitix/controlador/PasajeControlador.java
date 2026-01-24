@@ -19,7 +19,7 @@ public class PasajeControlador {
     private List<Pasaje> pasajesRegistrados;
     private int indiceActual = 0;
 
-    public PasajeControlador(VistaRegistroPasajero vista, Vuelo vuelo, List<String> asientos, Usuario usuario) {
+    public PasajeControlador(VistaRegistroPasajero vista, Vuelo vuelo, List<String> asientos, Usuario usuario){
         this.vistaRegistro = vista;
         this.vuelo = vuelo;
         this.asientos = asientos;
@@ -33,7 +33,7 @@ public class PasajeControlador {
         actualizarVista();
     }
 
-    private void siguiente() {
+    private void siguiente(){
     try {
         Pasajero pasajero = vistaRegistro.capturarPasajero();
         Equipaje equipaje = vistaRegistro.capturarEquipaje();
@@ -47,37 +47,36 @@ public class PasajeControlador {
         String codigoTkt = "TKT-" + System.currentTimeMillis() + "-" + (indiceActual + 1);
         Pasaje pasaje = new Pasaje(codigoTkt, vuelo.getPrecio(), asiento, clase, pasajero, vuelo, equipaje);
 
-        // Guardar pasaje en la lista
-        if (indiceActual < pasajesRegistrados.size()) {
+        if(indiceActual < pasajesRegistrados.size()){
             pasajesRegistrados.set(indiceActual, pasaje);
         } else {
             pasajesRegistrados.add(pasaje);
         }
 
-        if (indiceActual < asientos.size() - 1) {
+        if(indiceActual < asientos.size() - 1){
             indiceActual++;
             actualizarVista();
         } else {
             finalizarRegistro();
         }
 
-    } catch (IllegalArgumentException ex) {
+    } catch(IllegalArgumentException ex) {
         JOptionPane.showMessageDialog(vistaRegistro, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 
-    private void anterior() {
+    private void anterior(){
         if (indiceActual > 0) {
             indiceActual--;
             actualizarVista();
         }
     }
 
-    private void actualizarVista() {
+    private void actualizarVista(){
         vistaRegistro.actualizarInterfaz(pasajesRegistrados, indiceActual, asientos);
     }
 
-    private ClaseAsiento calcularClase(String asiento) {
+    private ClaseAsiento calcularClase(String asiento){
         try {
             int fila = Integer.parseInt(asiento.substring(1));
             if (fila <= 2) return ClaseAsiento.PRIMERA_CLASE;
@@ -88,7 +87,7 @@ public class PasajeControlador {
         }
     }
 
-    private void finalizarRegistro() {
+    private void finalizarRegistro(){
     try {
         System.out.println("Intentando finalizar registro...");
 

@@ -1,0 +1,26 @@
+============================================
+               ORBITIX - FACTURA            
+============================================
+N° Factura: FAC-0FEC51CA
+Fecha/Hora: 23/01/2026 22:19
+--------------------------------------------
+CLIENTE:
+Nombre : Andrea
+--------------------------------------------
+VUELO:
+Código : V002
+Ruta   : Guayaquil -> Quito
+Fecha  : 26/01/2026
+--------------------------------------------
+DETALLE:
+Pasajero | Asiento | Clase | Base | Recargo | Desc | Total
+----------------------------------------------------------
+Alondra | C7 | ECONOMICA | 75.00 | 0.00 | 0.00 | 75.00
+--------------------------------------------
+RESUMEN:
+Subtotal (Base)   : $75.00
+Total Recargos    : $0.00
+Total Descuentos  : $0.00
+TOTAL A PAGAR     : $75.00
+============================================
+Gracias por su compra.

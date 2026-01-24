@@ -10,3 +10,7 @@
 1751661446;Paula Granda;20;V008;B1;MALETA_MANO;185.0;20.0
 1751307727;Karla;Guaña;0998506529;karla@gmail.com;18
 1751661446;Paula;Granda;0998765434;paula@gmail.com;19
+1751307727;Karla;Guaña;0998506529;karla@gmail.com;18
+1751307727;Karla;Guaña;0998506529;karla@gmail.com;10
+1751307727;Karla;Guaña;0998506529;karla@gmail.com;10
+1754872701;Alondra;Guaña;0998506529;alondra@gmail.com;5

@@ -191,15 +191,15 @@ public class VistaFacturacion extends javax.swing.JFrame {
 
     private void btnImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirTicketActionPerformed
 
-    StringBuilder sb = new StringBuilder();
-    for (com.mycompany.orbitix.modelo.Pasaje p : pasajes) {
-        sb.append(com.mycompany.orbitix.util.Ticket.generarBoardingPass(p)).append("\n");
-    }
+        StringBuilder sb = new StringBuilder();
+        for (com.mycompany.orbitix.modelo.Pasaje p : pasajes) {
+            sb.append(com.mycompany.orbitix.util.Ticket.generarBoardingPass(p)).append("\n");
+        }
 
-    javax.swing.JTextArea area = new javax.swing.JTextArea(sb.toString(), 25, 60);
-    area.setEditable(false);
-    javax.swing.JOptionPane.showMessageDialog(this, new javax.swing.JScrollPane(area),
-            "Ticket(s) de vuelo", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        javax.swing.JTextArea area = new javax.swing.JTextArea(sb.toString(), 25, 60);
+        area.setEditable(false);
+        javax.swing.JOptionPane.showMessageDialog(this, new javax.swing.JScrollPane(area),
+                "Ticket(s) de vuelo", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnImprimirTicketActionPerformed
 

@@ -6,11 +6,7 @@ package com.mycompany.orbitix;
 
 import com.mycompany.orbitix.controlador.InicioControlador;
 import com.mycompany.orbitix.datos.RepositorioArchivos;
-import com.mycompany.orbitix.datos.RepositorioDatos;
-import com.mycompany.orbitix.modelo.*;
 import com.mycompany.orbitix.vista.VistaInicio;
-import java.util.List;
-import java.util.Scanner;
 
 
 
