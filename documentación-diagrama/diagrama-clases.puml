@@ -102,5 +102,68 @@ class Pasaje {
 
 class Pasajero {
   - cedula: String
-  - nombre: St
+  - nombre: String
+  - apellido: String
+  - telefono: String
+  - email: String
+  - edad: int
+  + Pasajero(cedula: String, nombre: String, apellido: String, telefono: String, email: String, edad: int)
+  + toString(): String
+}
 
+class Equipaje {
+  - tipo: TipoEquipaje
+  - costoExtra: double
+  + Equipaje(tipo: TipoEquipaje)
+  - calcularCostoExtra(): double
+}
+
+class HistorialVuelo {
+  - cedulaUsuario: String
+  - codigoVuelo: String
+  - origen: String
+  - destino: String
+  - fecha: String
+  - asiento: String
+  - totalPagado: double
+  + HistorialVuelo(...)
+  + toLine(): String
+  + fromLine(line: String): HistorialVuelo {static}
+}
+
+enum ClaseAsiento {
+  ECONOMICA
+  EJECUTIVA
+  PRIMERA_CLASE
+}
+
+enum TipoEquipaje {
+  ARTICULO_PERSONAL
+  MALETA_MANO
+  MALETA_BODEGA
+}
+
+
+Aerolinea "1" *-- "0..*" Vuelo
+Vuelo "1" -- "1" Ruta
+Vuelo "1" -- "1" Avion
+
+Usuario <|-- Cliente
+
+Compra "1" -- "1" Usuario
+Compra "1" *-- "0..*" Pasaje
+Compra "1" -- "0..1" Pago
+
+Pago "1" -- "1" MetodoPago
+MetodoPago <|.. PagoTarjeta
+
+Pasaje "1" -- "1" Vuelo
+Pasaje "1" -- "1" Pasajero
+Pasaje "1" -- "0..1" Equipaje
+Pasaje "1" -- "1" ClaseAsiento
+
+Equipaje "1" -- "1" TipoEquipaje
+
+}
+
+@enduml
