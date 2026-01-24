@@ -136,6 +136,7 @@ public class VistaRegistroPasajero extends javax.swing.JDialog{
 
         panelPrincipal.setBackground(new java.awt.Color(153, 0, 153));
         panelPrincipal.setToolTipText("");
+        panelPrincipal.setName(""); // NOI18N
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1360, 677));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -330,11 +331,11 @@ public class VistaRegistroPasajero extends javax.swing.JDialog{
                         .addGap(81, 81, 81)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(457, 457, 457)
-                        .addComponent(lblAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(277, 277, 277)
+                        .addComponent(jLabel1))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(jLabel1)))
+                        .addGap(413, 413, 413)
+                        .addComponent(lblAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(391, Short.MAX_VALUE))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -342,9 +343,9 @@ public class VistaRegistroPasajero extends javax.swing.JDialog{
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAsiento)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

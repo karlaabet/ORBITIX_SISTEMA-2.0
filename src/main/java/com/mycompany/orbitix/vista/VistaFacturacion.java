@@ -140,10 +140,6 @@ public class VistaFacturacion extends javax.swing.JFrame {
         panelFacturacion.setLayout(panelFacturacionLayout);
         panelFacturacionLayout.setHorizontalGroup(
             panelFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturacionLayout.createSequentialGroup()
-                .addContainerGap(404, Short.MAX_VALUE)
-                .addComponent(laberagradecimiento)
-                .addGap(329, 329, 329))
             .addGroup(panelFacturacionLayout.createSequentialGroup()
                 .addGroup(panelFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFacturacionLayout.createSequentialGroup()
@@ -151,15 +147,18 @@ public class VistaFacturacion extends javax.swing.JFrame {
                         .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelFacturacionLayout.createSequentialGroup()
                         .addGap(560, 560, 560)
-                        .addComponent(btnContinuarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnContinuarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelFacturacionLayout.createSequentialGroup()
+                        .addGap(349, 349, 349)
+                        .addComponent(laberagradecimiento)))
+                .addContainerGap(384, Short.MAX_VALUE))
         );
         panelFacturacionLayout.setVerticalGroup(
             panelFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFacturacionLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(81, 81, 81)
                 .addComponent(laberagradecimiento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnContinuarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
