@@ -4,6 +4,7 @@
  */
 package com.mycompany.orbitix.controlador;
 
+
 import com.mycompany.orbitix.datos.RepositorioArchivos;
 import com.mycompany.orbitix.modelo.*;
 import com.mycompany.orbitix.vista.VistaCompra;
@@ -46,6 +47,7 @@ public class CompraControlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!vista.validarAntesDePagar()) return;
         realizarPago();
     }
 
