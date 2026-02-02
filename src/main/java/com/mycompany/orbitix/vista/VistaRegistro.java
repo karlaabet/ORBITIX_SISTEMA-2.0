@@ -4,6 +4,8 @@
  */
 package com.mycompany.orbitix.vista;
 
+import com.mycompany.orbitix.controlador.InicioControlador;
+import com.mycompany.orbitix.controlador.LoginControlador;
 import com.mycompany.orbitix.controlador.UsuarioControlador;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -237,17 +239,19 @@ public class VistaRegistro extends javax.swing.JFrame {
 
         if (control.registrar(cedula, nombre, email, pass)) {
             JOptionPane.showMessageDialog(this, "¡Cuenta creada exitosamente!");
-            new VistaLogin().setVisible(true);
+            VistaLogin login = new VistaLogin();
+            new LoginControlador(login); 
+            login.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Hubo un error al guardar los datos.");
         }
 
-
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnVolverLOGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverLOGActionPerformed
         VistaInicio inicio = new VistaInicio();
+        new InicioControlador(inicio); 
         inicio.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverLOGActionPerformed

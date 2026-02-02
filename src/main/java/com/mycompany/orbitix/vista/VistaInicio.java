@@ -33,6 +33,8 @@ public class VistaInicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
 }
+  
+
    public JButton getBtnIniciarSesion() {
         return btnIniciarSesion;
     }
@@ -153,9 +155,20 @@ public class VistaInicio extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VistaInicio().setVisible(true));
+        try {
+                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                        if ("Nimbus".equals(info.getName())) {
+                            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                            break;
+                        }
+                    }
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                    java.util.logging.Logger.getLogger(VistaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+        java.awt.EventQueue.invokeLater(() -> {
+            VistaInicio inicio = new VistaInicio();
+            inicio.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
