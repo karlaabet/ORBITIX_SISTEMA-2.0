@@ -64,11 +64,19 @@ public class CompraControlador implements ActionListener {
             Compra nuevaCompra = new Compra(codigoCompra, usuario);
 
             nuevaCompra.setPago(pago);
+            java.util.List<String> asientosSeleccionados = new java.util.ArrayList<>();
             for (Pasaje p : pasajes) {
                 nuevaCompra.agregarPasaje(p); 
+                asientosSeleccionados.add(p.getAsiento());
             }
             RepositorioArchivos repo = new RepositorioArchivos();
             repo.guardarCompra(nuevaCompra);
+            HistorialControlador.registrarHistorial(
+            usuario,
+            vuelo,
+            asientosSeleccionados,
+            totalPagar
+        );
             JOptionPane.showMessageDialog(vista, "¡Pago realizado con éxito!\nTotal: $" + String.format("%.2f", totalPagar));
             VistaFacturacion vistaFac = new VistaFacturacion();
             new FacturacionControlador(vistaFac, usuario, vuelo, pasajes); 
